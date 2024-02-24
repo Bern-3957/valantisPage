@@ -14,7 +14,7 @@ function generateXAuthHeader(password) {
 
 const xAuthHeader = generateXAuthHeader("Valantis");
 
-const BASE_URL = 'http://api.valantis.store:40000/'
+const BASE_URL = 'https://api.valantis.store:40000/'
 
 const HEADERS = {
     'X-Auth': xAuthHeader
