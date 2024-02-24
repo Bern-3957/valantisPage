@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/valantisPage/static/css/main.9827f91d.css",
+    "main.js": "/valantisPage/static/js/main.534c6760.js",
+    "static/js/453.895f32c9.chunk.js": "/valantisPage/static/js/453.895f32c9.chunk.js",
+    "static/media/preloader.gif": "/valantisPage/static/media/preloader.67fd45a38445a2c8213c.gif",
+    "index.html": "/valantisPage/index.html",
+    "main.9827f91d.css.map": "/valantisPage/static/css/main.9827f91d.css.map",
+    "main.534c6760.js.map": "/valantisPage/static/js/main.534c6760.js.map",
+    "453.895f32c9.chunk.js.map": "/valantisPage/static/js/453.895f32c9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9827f91d.css",
+    "static/js/main.534c6760.js"
+  ]
+}
