@@ -2,7 +2,7 @@
   "name": "valantis_test",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://Bern-3957.github.io/valantisPage",
+  "homepage": "https://Bern-3957.github.io/valantisPage",
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.1",
     "@testing-library/jest-dom": "^5.17.0",
