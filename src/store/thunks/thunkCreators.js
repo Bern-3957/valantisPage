@@ -1,16 +1,26 @@
 import {productsAPI} from "../../api/api";
 import {setIsFetchingAC, setProductsItemsAC} from "../actions/actionCreators";
-import {current} from "@reduxjs/toolkit";
 
 const removeDuplicates = (productsIds) => {
-    return [...new Set(productsIds)]
+    let uniqueList = [];
+    let ids = new Set();
+
+    productsIds.forEach(item => {
+        if (!ids.has(item.id)) {
+            uniqueList.push(item);
+            ids.add(item.id);
+        }
+    });
+
+    return uniqueList;
+
 }
 
 export const getProductsItemsTC = (currentPage) => (dispatch) => {
     dispatch(setIsFetchingAC(true))
     productsAPI.getProductsIds(currentPage)
         .then(response=>{
-            dispatch(getProductsItemsFromIdsTC(removeDuplicates(response.data.result))).then(()=>{
+            dispatch(getProductsItemsFromIdsTC(response.data.result)).then(()=>{
                 dispatch(setIsFetchingAC(false))
             })
         })
@@ -23,7 +33,7 @@ export const getFilteredProductsItemsTC = (params) => (dispatch) =>{
     dispatch(setIsFetchingAC(true))
     dispatch(setProductsItemsAC([]))
     productsAPI.getFilteredProductsItemsIds(params).then(response=>{
-        dispatch(getProductsItemsFromIdsTC(removeDuplicates(response.data.result))).then(()=>{
+        dispatch(getProductsItemsFromIdsTC(response.data.result)).then(()=>{
             dispatch(setIsFetchingAC(false))
         })
 
@@ -34,7 +44,7 @@ export const getFilteredProductsItemsTC = (params) => (dispatch) =>{
 
 export const getProductsItemsFromIdsTC = (productsIds) => (dispatch) => {
     return productsAPI.getProductsItems(productsIds).then(response=>{
-        dispatch(setProductsItemsAC(response.data.result))
+        dispatch(setProductsItemsAC(removeDuplicates(response.data.result)))
     }).catch(error=>{
         console.log("Server error: ", error )
     })

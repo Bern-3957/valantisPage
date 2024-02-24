@@ -1,9 +1,23 @@
 import axios from "axios";
+import md5 from 'js-md5';
+
+function generateXAuthHeader(password) {
+    function getCurrentDate() {
+        const now = new Date();
+        const year = now.getUTCFullYear();
+        const month = (now.getUTCMonth() + 1).toString().padStart(2, '0');
+        const day = now.getUTCDate().toString().padStart(2, '0');
+        return `${year}${month}${day}`;
+    }
+    return md5(`${password}_${getCurrentDate()}`);
+}
+
+const xAuthHeader = generateXAuthHeader("Valantis");
 
 const BASE_URL = 'http://api.valantis.store:40000/'
 
 const HEADERS = {
-    'X-Auth': '36c58664c6a85656502117384b351c40'
+    'X-Auth': xAuthHeader
 }
 
 export const productsAPI = {
@@ -13,7 +27,8 @@ export const productsAPI = {
                 "params": {"offset": (currentPage-1)*50, "limit": 50}
             },
             {
-                headers: HEADERS
+                headers: HEADERS,
+                referrerPolicy: "unsafe_url"
             })
     },
     getProductsItems(productsIds) {
@@ -22,7 +37,8 @@ export const productsAPI = {
                 "params": {"ids": productsIds}
             },
             {
-                headers: HEADERS
+                headers: HEADERS,
+                referrerPolicy: "unsafe_url"
             })
     },
 
@@ -31,18 +47,11 @@ export const productsAPI = {
             "action": "filter",
             "params": params,
         }, {
-            headers: HEADERS
+            headers: HEADERS,
+            referrerPolicy: "unsafe_url"
         })
     },
-    //
-    // getFilteredProductsBrandItemsIds(params){
-    //     debugger
-    //     return axios.post(BASE_URL, {
-    //         "action": "filter",
-    //         "params": params,
-    //     }, {
-    //         headers: HEADERS
-    //     })
-    // }
+
 }
+
 
